@@ -20,7 +20,7 @@ class Main extends PluginBase implements Listener {
 	}
 	public function onInteract(PlayerInteractEvent $event) {
 		
-		$action = getAction();
+		$action = $event->getAction();
 		$face = $event->getFace();
 		$block = $event->getBlock();
 		$level = $block->getLevel();
