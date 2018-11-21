@@ -31,10 +31,10 @@ class Main extends PluginBase implements Listener {
 			if ($item->getID() === 325) {
 			
 				$genBlock = $block->getSide($face);
-				$level->setBlock($genBlock, Block::get(0));
 				$X = $genBlock->getX();
 				$Y = $genBlock->getY();
 				$Z = $genBlock->getZ();
+				$level->setBlock(new Vector3($X, $Y + 1, $Z), Block::get(1));
 				$int = 0;
 				$blockBelow = $level->getBlock(new Vector3($X, $Y - $int, $Z));
 				
