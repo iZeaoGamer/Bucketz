@@ -31,7 +31,7 @@ class Main extends PluginBase implements Listener {
 			if ($item instanceof Bucket) {
 			
 				$genBlock = $block->getSide($face);
-				$level->setBlock($genBlock, Block::get(STONE));
+				$level->setBlock($genBlock, Block::get(1));
 				$X = $genBlock->getX();
 				$Y = $genBlock->getY();
 				$Z = $genBlock->getZ();
@@ -40,7 +40,7 @@ class Main extends PluginBase implements Listener {
 				
 				while  ($blockBelow->getID() !== 0) {
 				
-					$level->setBlock($blockBelow, Block::get(STONE));
+					$level->setBlock($blockBelow, Block::get(1));
 					$int++;
 					
 					$blockBelow = $level->getBlock(new Vector3($X, $Y - $int, $Z));
