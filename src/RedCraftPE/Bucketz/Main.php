@@ -1,6 +1,6 @@
 <?php
 
-namespace RedCraftPE\Bucketz
+namespace RedCraftPE\Bucketz;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\command\Command;
