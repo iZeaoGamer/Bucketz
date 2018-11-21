@@ -25,6 +25,7 @@ class Main extends PluginBase implements Listener {
 		$block = $event->getBlock();
 		$level = $block->getLevel();
 		$item = $event->getItem();
+		var_dump($item);
 		
 		if ($action === 1) {
 		
