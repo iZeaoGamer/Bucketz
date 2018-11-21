@@ -25,30 +25,25 @@ class Main extends PluginBase implements Listener {
 		$block = $event->getBlock();
 		$level = $block->getLevel();
 		$item = $event->getItem();
-		var_dump($item->getID());
 		
 		if ($action === 1) {
 		
 			if ($item->getID() === 325) {
 			
 				$genBlock = $block->getSide($face);
-				var_dump($genBlock);
-				$level->setBlock($genBlock, Block::get(1));
 				$X = $genBlock->getX();
-				var_dump($X);
 				$Y = $genBlock->getY();
-				var_dump($Y);
 				$Z = $genBlock->getZ();
-				var_dump($Z);
-				$int = 1;
+				$level->setBlock(new Vector3($X, $Y, $Z), Block::get(1));
 				$blockBelow = $level->getBlock(new Vector3($X, $Y - $int, $Z));
 				
-				while  ($blockBelow->getID() !== 0) {
+				while  ($blockBelow->getID() === 0 && $Y - $int !== -1) {
 				
 					$level->setBlock($blockBelow, Block::get(1));
 					$int++;
 					
 					$blockBelow = $level->getBlock(new Vector3($X, $Y - $int, $Z));
+					var_dump($Y - $int);
 				}
 			}
 		}
