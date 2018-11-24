@@ -96,12 +96,12 @@ class Main extends PluginBase implements Listener {
 					$Y = $block->getY();
 					$Z = $block->getZ();
 					$int = 1;
-					$level->setBlock($block, Block::get("STONE"));
+					$level->setBlock($block, Block::get(1));
 					$blockBelow = $level->getBlock(new Vector3($X, $Y - $int, $Z));
 					
 					while ($blockBelow->getID() === 0) {
 					
-						$level->setBlock($blockBelow, Block::get("STONE"));
+						$level->setBlock($blockBelow, Block::get(1));
 						
 						$int++;
 						$blockBelow = $level->getBlock(new Vector3($X, $Y - $int, $Z));
