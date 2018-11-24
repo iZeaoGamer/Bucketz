@@ -58,7 +58,7 @@ class Main extends PluginBase implements Listener {
 											$amount = $args[2];
 											if (is_numeric($amount)) {
 									
-												$sender->getInventory()->addItem(Item::get(1, 0, $amount)->setCustomName(TextFormat::AQUA . "GenBucket"));
+												$sender->getInventory()->addItem(Item::get(325, 0, $amount)->setCustomName(TextFormat::AQUA . "GenBucket"));
 												$sender->sendMessage(TextFormat::GREEN . "{$player} has been given {$amount} Bucketz");
 												return true;
 											} else {
