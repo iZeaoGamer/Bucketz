@@ -104,6 +104,8 @@ class Main extends PluginBase implements Listener {
 					$int = 1;
 					//$level->setBlock($block, Block::get(1));
 					$blockBelow = $level->getBlock(new Vector3($X, $Y - $int, $Z));
+					var_dump($blockBelow);
+					var_dump($blockBelow->getID());
 					
 					while ($blockBelow->getID() === 0) {
 					
