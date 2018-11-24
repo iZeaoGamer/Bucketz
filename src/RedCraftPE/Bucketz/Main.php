@@ -34,8 +34,7 @@ class Main extends PluginBase implements Listener {
 				$X = $genBlock->getX();
 				$Y = $genBlock->getY();
 				$Z = $genBlock->getZ();
-				$level->setBlock(new Vector3($X, $Y, $Z), Block::get(1));
-				$int = 0;
+				$int = 1;
 				$blockBelow = $level->getBlock(new Vector3($X, $Y - $int, $Z));
 				
 				while  ($blockBelow->getID() === 0 && $Y - $int !== -1) {
