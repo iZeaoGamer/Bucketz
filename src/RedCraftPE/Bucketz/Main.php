@@ -96,8 +96,11 @@ class Main extends PluginBase implements Listener {
 				if ($block instanceof Lava || $block instanceof Water) {
 				
 					$X = $block->getX();
+					var_dump($X);
 					$Y = $block->getY();
+					var_dump($Y);
 					$Z = $block->getZ();
+					var_dump($Z);
 					$int = 1;
 					//$level->setBlock($block, Block::get(1));
 					$blockBelow = $level->getBlock(new Vector3($X, $Y - $int, $Z));
