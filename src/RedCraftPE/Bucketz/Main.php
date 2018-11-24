@@ -38,19 +38,35 @@ class Main extends PluginBase implements Listener {
 								
 								if (!$args[1]) {
 									
-									$sender->sendMessage(TextFormat::WHITE . "Usage: /bucketz give <amount>
-									return true;							               
+									$sender->sendMessage(TextFormat::WHITE . "Usage: /bucketz give <player> <amount>");
+									return true;							                                          
 								} else {
 
-									$amount = $args[1];
-									if (is_numeric($amount)) {
+									$player = $this->getServer()->getPlayerExact($args[1]);
+									if (!$player) {
 									
-										$sender->getInventory()->addItem(Item::get("BUCKET", 0, 1)->setCustomName(TextFormat::AQUA . "GenBucket"));
-										$sender->sendMessage(TextFormat::GREEN . "You ");
+										$sender->sendMessage(TextFormat::RED . "I cannot find a player with the name {$args[1]}.");
+										return true;
 									} else {
 									
-										$sender->sendMessage(TextFormat::WHITE . "Usage: /bucketz give [amount]");
-										return true;								                                     
+										if ($args[2]) {
+										
+											$amount = $args[2];
+											if (is_numeric($amount)) {
+									
+												$sender->getInventory()->addItem(Item::get(1, 0, $amount)->setCustomName(TextFormat::AQUA . "GenBucket"));
+												$sender->sendMessage(TextFormat::GREEN . "{$player} has been given {$amount} Bucketz");
+												return true;
+											} else {
+									
+												$sender->sendMessage(TextFormat::WHITE . "Usage: /bucketz give [amount]");
+												return true;								                                     
+											}
+										} else {
+										
+											$sender->sendMessage(TextFormat::WHITE . "Usage: /bucketz give <player> <amount>");
+											return true;
+										}
 									}
 								}
 							}
