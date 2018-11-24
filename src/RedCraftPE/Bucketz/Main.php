@@ -18,31 +18,74 @@ class Main extends PluginBase implements Listener {
 	
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	}
-	public function onInteract(PlayerInteractEvent $event) {
+	public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
+	
+		switch(strtolower($command)) {
 		
-		$action = $event->getAction();
-		$face = $event->getFace();
+			case "bucketz":
+				
+				if (!$args) {
+				
+					$this->sendHelp(Player $sender);
+					return true;
+				} else {
+				
+					switch($args[0]) {
+					
+						case "give":
+							
+							if ($sender->hasPermission("bucketz.give")) {
+								
+								if (!$args[1]) {
+									
+									$sender->sendMessage(TextFormat::WHITE . "Usage: /bucketz give <amount>
+									return true;							               
+								} else {
+
+									$amount = $args[1];
+									if (is_numeric($amount)) {
+									
+										$sender->getInventory()->addItem(Item::get("BUCKET", 0, 1)->setCustomName(TextFormat::AQUA . "GenBucket"));
+										$sender->sendMessage(TextFormat::GREEN . "You ");
+									} else {
+									
+										$sender->sendMessage(TextFormat::WHITE . "Usage: /bucketz give [amount]");
+										return true;								                                     
+									}
+								}
+							}
+						break;
+					}
+				}
+			break;
+		}
+	}
+	public function onPlace(BlockPlaceEvent $event) {
+	
+		$item = $event->getItem();
 		$block = $event->getBlock();
 		$level = $block->getLevel();
-		$item = $event->getItem();
 		
-		if ($action === 1) {
+		if ($item instanceof Bucket) {
 		
-			if ($item->getID() === 325) {
+			if ($item->getCustomName() === TextFormat::AQUA . "GenBucket") {
 			
-				$genBlock = $block->getSide($face);
-				$X = $genBlock->getX();
-				$Y = $genBlock->getY();
-				$Z = $genBlock->getZ();
-				$int = 1;
-				$blockBelow = $level->getBlock(new Vector3($X, $Y - $int, $Z));
+				if ($block instanceof Lava || $block instanceof Water) {
 				
-				while  ($blockBelow->getID() === 0 && $Y - $int !== -1) {
-					
-					$level->setBlock($blockBelow, Block::get(1));
-					$int++;
-					
+					$X = $block->getX();
+					$Y = $block->getY();
+					$Z = $block->getZ();
+					$int = 1;
+					$level->setBlock($block, Block::get("STONE"));
 					$blockBelow = $level->getBlock(new Vector3($X, $Y - $int, $Z));
+					
+					while ($blockBelow->getID() === 0) {
+					
+						$level->setBlock($blockBelow, Block::get("STONE"));
+						
+						$int++;
+						$blockBelow = $level->getBlock(new Vector3($X, $Y - $int, $Z));
+					}
 				}
 			}
 		}
