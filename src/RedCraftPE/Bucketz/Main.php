@@ -8,7 +8,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\event\Listener;
 use pocketmine\utils\TextFormat;
 use pocketmine\item\Bucket;
-use pocketmine\event\block\BlockPlaceEvent;
+use pocketmine\event\player\PlayerBucketEmptyEvent;
 use pocketmine\block\Block;
 use pocketmine\math\Vector3;
 use pocketmine\item\Item;
@@ -80,29 +80,28 @@ class Main extends PluginBase implements Listener {
 			break;
 		}
 	}
-	public function onPlace(BlockPlaceEvent $event) {
+	public function onEmpty(PlayerBucketEmptyEvent $event) {
 	
 		$item = $event->getItem();
-		var_dump($item);
-		var_dump($item->getName());
-		$block = $event->getBlock();
-		var_dump($block);
+		$block = $event->getBlockClicked();
+		$face = $event->getBlockFace();
 		$level = $block->getLevel();
 		
 		if ($item instanceof Bucket) {
 		
 			if ($item->getName() === TextFormat::AQUA . "GenBucket") {
-			
-				if ($block instanceof Lava || $block instanceof Water) {
 				
-					$X = $block->getX();
+				$genBlock = $block->getSide($face);
+				if ($genBlock instanceof Lava || $genBlock instanceof Water) {
+				
+					$X = $genBlock->getX();
 					var_dump($X);
-					$Y = $block->getY();
+					$Y = $genBlock->getY();
 					var_dump($Y);
-					$Z = $block->getZ();
+					$Z = $genBlock->getZ();
 					var_dump($Z);
 					$int = 1;
-					//$level->setBlock($block, Block::get(1));
+					$level->setBlock($genBlock, Block::get(1));
 					$blockBelow = $level->getBlock(new Vector3($X, $Y - $int, $Z));
 					var_dump($blockBelow);
 					var_dump($blockBelow->getID());
