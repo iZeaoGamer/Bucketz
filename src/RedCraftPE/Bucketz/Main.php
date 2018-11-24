@@ -15,7 +15,6 @@ use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\block\Lava;
 use pocketmine\block\Water;
-use pocketmine\item\Bucket;
 
 class Main extends PluginBase implements Listener {
 
