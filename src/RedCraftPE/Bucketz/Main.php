@@ -58,7 +58,7 @@ class Main extends PluginBase implements Listener {
 											$amount = $args[2];
 											if (is_numeric($amount)) {
 									
-												$sender->getInventory()->addItem(Item::get(325, 0, $amount)->setCustomName(TextFormat::AQUA . "GenBucket"));
+												$sender->getInventory()->addItem(Item::get(325, 10, $amount)->setCustomName(TextFormat::AQUA . "GenBucket"));
 												$sender->sendMessage(TextFormat::GREEN . "{$player} has been given {$amount} Bucketz");
 												return true;
 											} else {
@@ -83,12 +83,15 @@ class Main extends PluginBase implements Listener {
 	public function onPlace(BlockPlaceEvent $event) {
 	
 		$item = $event->getItem();
+		var_dump($item);
+		var_dump($item->getName());
 		$block = $event->getBlock();
+		var_dump($block);
 		$level = $block->getLevel();
 		
 		if ($item instanceof Bucket) {
 		
-			if ($item->getCustomName() === TextFormat::AQUA . "GenBucket") {
+			if ($item->getName() === TextFormat::AQUA . "GenBucket") {
 			
 				if ($block instanceof Lava || $block instanceof Water) {
 				
@@ -96,7 +99,7 @@ class Main extends PluginBase implements Listener {
 					$Y = $block->getY();
 					$Z = $block->getZ();
 					$int = 1;
-					$level->setBlock($block, Block::get(1));
+					//$level->setBlock($block, Block::get(1));
 					$blockBelow = $level->getBlock(new Vector3($X, $Y - $int, $Z));
 					
 					while ($blockBelow->getID() === 0) {
