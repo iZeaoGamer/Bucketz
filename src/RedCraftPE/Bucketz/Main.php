@@ -8,9 +8,14 @@ use pocketmine\command\CommandSender;
 use pocketmine\event\Listener;
 use pocketmine\utils\TextFormat;
 use pocketmine\item\Bucket;
-use pocketmine\event\player\PlayerInteractEvent;
+use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\block\Block;
 use pocketmine\math\Vector3;
+use pocketmine\item\Item;
+use pocketmine\Player;
+use pocketmine\block\Lava;
+use pocketmine\block\Water;
+use pocketmine\item\Bucket;
 
 class Main extends PluginBase implements Listener {
 
@@ -26,7 +31,7 @@ class Main extends PluginBase implements Listener {
 				
 				if (!$args) {
 				
-					$this->sendHelp(Player $sender);
+					$this->sendHelp($sender);
 					return true;
 				} else {
 				
@@ -105,5 +110,10 @@ class Main extends PluginBase implements Listener {
 				}
 			}
 		}
+	}
+	public function sendHelp(Player $player) {
+	
+		$player->sendMessage(TextFormat::AQUA . "Bucketz Help: \n" . TextFormat::GRAY . "/bucketz give <player> <amount>: Give GenBuckets to players with this command.");
+		return;
 	}
 }
